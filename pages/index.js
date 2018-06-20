@@ -5,6 +5,7 @@ import { getInputValue } from "../utils"
 import Head from "../components/head"
 import Form from "../components/form"
 import PizzaEvents from "../components/pizza-events"
+import Footer from "../components/footer"
 
 const findPizza = async location => {
 	const res = await fetch(`/.netlify/functions/find-pizza`, { 
@@ -50,10 +51,10 @@ export default class Root extends React.Component {
 
 	render() {
 		return (
-			<main>
+			<main className="container" style={{padding: '70px 0 200px'}}>
 				<Head />
 				
-				<h1>Welcome to the free pizza finder 🍕</h1>
+				<h1 className="row">Welcome to the free pizza finder 🍕</h1>
 				
 				<Form
 					locationEl={this.$location}
@@ -63,6 +64,8 @@ export default class Root extends React.Component {
 				{ this.state.searching && <p>Searching for pizza 🔎</p> }
 				
 				<PizzaEvents pizzas={this.state.pizzas} />
+				
+				<Footer />
 			</main>
 		)
 	}

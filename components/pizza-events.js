@@ -1,7 +1,8 @@
-import { map, isEmpty, or, equals, pipe, not } from "ramda"
+import { isEmpty, or, equals, pipe, not } from "ramda"
+import { mapIndexed } from "../utils"
 
-const PizzaEvent = (event) => (
-	<a href={event.link}>
+const PizzaEvent = (event, index) => (
+	<a href={event.link} key={index}>
 		<h3>{ event.name }</h3>
 	</a>
 )
@@ -17,7 +18,7 @@ const PizzaEvents = ({ pizzas }) => {
 			<React.Fragment>
 				<hr />
 				<p>I found pizza at the following events near you:</p>
-				{ map(PizzaEvent, pizzas) }
+				{ mapIndexed(PizzaEvent, pizzas) }
 			</React.Fragment>
 		)
 	}
