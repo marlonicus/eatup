@@ -60,6 +60,7 @@ env.js
 
 # next.js build output
 .next
+out
 
 # netlify build output
 .functions
