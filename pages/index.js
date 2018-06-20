@@ -51,7 +51,7 @@ export default class Root extends React.Component {
 
 	render() {
 		return (
-			<main className="container" style={{padding: '70px 0 200px'}}>
+			<main className="container" style={{padding: '70px 20px 200px'}}>
 				<Head />
 				
 				<h1 className="row">Welcome to the free pizza finder 🍕</h1>
