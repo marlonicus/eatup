@@ -1,41 +1,10 @@
 import React from "react"
-import { pipe, bind, partial, map, isEmpty } from "ramda"
-import { cancelEvent, getInputValue } from "../utils"
+import { bind } from "ramda"
+import { getInputValue } from "../utils"
 
-const Form = ({ onSubmit, locationEl }) => (
-	<form onSubmit={pipe(cancelEvent, onSubmit)}>
-		<label htmlFor="location">Enter your City or ZIP Code:</label>
-		<br />
-		<input
-			type="text"
-			ref={locationEl}
-			id="location"
-			placeholder="Gothenburg, London, 90210..."
-		/>
-		<button type="submit">Search</button>
-	</form>
-)
-
-const Pizza = (event) => (
-	<a href={event.link}>
-		<h3>{ event.name }</h3>
-	</a>
-)
-
-const renderPizzas = pizzas => {
-	if (isEmpty(pizzas)) {
-		return <p>I can't find any pizza in your area 😞</p>
-	}
-	else {
-		return (
-			<React.Fragment>
-				<hr />
-				<p>I found pizza at the following events near you:</p>
-				{ map(Pizza, pizzas) }
-			</React.Fragment>
-		)
-	}
-}
+import Head from "../components/head"
+import Form from "../components/form"
+import PizzaEvents from "../components/pizza-events"
 
 const findPizza = async location => {
 	const res = await fetch(`/.netlify/functions/find-pizza`, { 
@@ -82,6 +51,8 @@ export default class Root extends React.Component {
 	render() {
 		return (
 			<main>
+				<Head />
+				
 				<h1>Welcome to the free pizza finder 🍕</h1>
 				
 				<Form
@@ -90,7 +61,8 @@ export default class Root extends React.Component {
 				/>
 				
 				{ this.state.searching && <p>Searching for pizza 🔎</p> }
-				{ renderPizzas(this.state.pizzas) }
+				
+				<PizzaEvents pizzas={this.state.pizzas} />
 			</main>
 		)
 	}
