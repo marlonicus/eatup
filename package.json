@@ -9,12 +9,14 @@
   },
   "dependencies": {
     "next": "^6.0.3",
+    "node-fetch": "^2.1.2",
     "ramda": "^0.25.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1"
   },
   "devDependencies": {
     "concurrently": "^3.6.0",
+    "dotenv": "^6.0.0",
     "netlify-lambda": "^0.4.0",
     "redbird": "^0.7.0"
   }
