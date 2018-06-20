@@ -1,6 +1,6 @@
+import React from "react"
 import { pipe, bind, partial } from "ramda"
 import { cancelEvent, getInputValue } from "../utils"
-import env from "../env"
 
 const Form = ({ onSubmit, locationEl }) => (
 	<form onSubmit={pipe(cancelEvent, onSubmit)}>
@@ -27,15 +27,15 @@ export default class Root extends React.Component {
 	}
 
 	searchForPizza = async () => {
-    const location = getInputValue(this.$location)
-    
+		const location = getInputValue(this.$location)
+
 		this.setState({
 			searching: true,
 		})
 
-		const data = await fetch(`/.netlify/functions/hello`, { mode: 'cors'} )
+		const data = await fetch(`/.netlify/functions/hello`, { mode: "cors" })
 		// const data = await fetch(`https://api.meetup.com/find/locations?query=${location}`, {
-			// mode: 'no-cors'
+		// mode: 'no-cors'
 		// })
 		const json = await data.text()
 		console.log(json)
@@ -45,7 +45,10 @@ export default class Root extends React.Component {
 		return (
 			<main>
 				<p>Welcome to the free pizza finder</p>
-				<Form locationEl={this.$location} onSubmit={bind(this.searchForPizza, this)} />
+				<Form
+					locationEl={this.$location}
+					onSubmit={bind(this.searchForPizza, this)}
+				/>
 			</main>
 		)
 	}

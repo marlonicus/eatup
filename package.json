@@ -4,8 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "LAMBDA_HOST=http://localhost:9000 concurrently \"netlify-lambda serve functions\" \"node build/envs.js && next\"",
-    "build": "node build/envs.js && netlify-lambda build functions && next build && next export"
+    "dev": "concurrently \"netlify-lambda serve functions\" \"next\" \"node build/dev-proxy.js\"",
+    "build": "netlify-lambda build functions && next build && next export"
   },
   "dependencies": {
     "next": "^6.0.3",
@@ -14,6 +14,8 @@
     "react-dom": "^16.4.1"
   },
   "devDependencies": {
-    "netlify-lambda": "^0.4.0"
+    "concurrently": "^3.6.0",
+    "netlify-lambda": "^0.4.0",
+    "redbird": "^0.7.0"
   }
 }
