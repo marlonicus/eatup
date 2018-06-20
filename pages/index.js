@@ -55,6 +55,8 @@ export default class Root extends React.Component {
 				<Head />
 				
 				<h1 className="row">Welcome to the free pizza finder 🍕</h1>
+				<h6><b>Version:</b> super-early-ghetto-prototype</h6>
+				<hr />
 				
 				<Form
 					locationEl={this.$location}
