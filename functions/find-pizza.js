@@ -1,7 +1,7 @@
 require("dotenv").config()
-import diacritics from "diacritics"
-import fetch from "node-fetch"
-import {
+const diacritics = require("diacritics")
+const fetch = require("node-fetch")
+const {
 	toPairs,
 	pipe,
 	map,
@@ -17,13 +17,13 @@ import {
 	any,
 	nth,
 	fromPairs,
-} from "ramda"
+} = require("ramda")
 
 const MEETUP_API_ENDPOINT = `https://api.meetup.com`
 const LOCATIONIQ_API_ENDPOINT = `https://eu1.locationiq.org/v1/search.php`
 
 const PIZZA_TERMS = [`pizza`, `🍕`, `'za`]
-const BEER_TERMS = [`beer`, `ale`, `brewskis`, `lager`, `pints`, `🍺`, `🍻`]
+const BEER_TERMS = [`beer`, `ale`, `brewski`, `lager`, `pint`, `🍺`, `🍻`]
 
 const matches = term => pipe(match(term), isEmpty, not)
 
@@ -63,20 +63,20 @@ const findLatLonOfLocation = async ({ location }) => {
 	return await res.json()
 }
 
-const wordMatch = word => new RegExp(`(\s|\W)?${word}(\s|\W)`, 'gi')
+const wordMatch = word => new RegExp(`(\s|\W)?${word}'?s?(\s|\W)?`, 'gmi')
 
 const containsPizzaMention = anyPass([
 	matches(wordMatch('pizza')),
 	matches(wordMatch('🍕')),
-	matches(wordMatch('\'za')),
+	matches(wordMatch('\'za'))
 ])
 
 const containsBeerMention = anyPass([
-	matches(/(\s?beer(\s|\.|\/))/g),
-	matches(/(\s?ale(\s|\.|\/))/g),
-	matches(/(\s?brewskis(\s|\.|\/))/g),
-	matches(/(\s?lager(\s|\.|\/))/g),
-	matches(/(\s?pints(\s|\.|\/))/g),
+	matches(wordMatch('beer')),
+	matches(wordMatch('ale')),
+	matches(wordMatch('brewski')),
+	matches(wordMatch('lager')),
+	matches(wordMatch('pint'))
 ])
 
 const getFoodOrDrinkMentionsFromEvent = event => {
