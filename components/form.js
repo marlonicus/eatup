@@ -3,13 +3,13 @@ import { pipe } from "ramda"
 
 const Form = ({ onSubmit, locationEl }) => (
 	<form onSubmit={pipe(cancelEvent, onSubmit)}>
-		<label htmlFor="location">Enter your City or ZIP Code:</label>
+		<label htmlFor="location">Enter your City or location:</label>
 		<br />
 		<input
 			type="text"
 			ref={locationEl}
 			id="location"
-			placeholder="Gothenburg, London, 90210..."
+			placeholder="Göteborg, London, Atlantis..."
 		/>
 		<button type="submit">Search</button>
 	</form>

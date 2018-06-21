@@ -45,6 +45,12 @@ export default class Root extends React.Component {
 		})
 		
 		const location = getInputValue(this.$location)
+		
+		if (location.toLowerCase() === `atlantis`) {
+			window.alert('I was only joking about Atlantis 🙄')
+			return this.foundPizza([])	
+		}
+		
 		const json = await findPizza(location)
 		this.foundPizza(json)
 	}
@@ -54,8 +60,8 @@ export default class Root extends React.Component {
 			<main className="container" style={{padding: '70px 20px 200px'}}>
 				<Head />
 				
-				<h1 className="row">Welcome to the free pizza finder 🍕</h1>
-				<h6><b>Version:</b> super-early-ghetto-prototype</h6>
+				<h2 className="row">Welcome to the free pizza finder 🍕</h2>
+				<h6><b>Version:</b> <a href="https://xkcd.com/37/" target="_blank">basic ass-prototype</a></h6>
 				<hr />
 				
 				<Form
