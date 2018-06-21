@@ -1,7 +1,7 @@
 require("dotenv").config()
-const diacritics = require("diacritics")
-const fetch = require("node-fetch")
-const {
+import diacritics from "diacritics"
+import fetch from "node-fetch"
+import {
 	toPairs,
 	pipe,
 	map,
@@ -17,7 +17,7 @@ const {
 	any,
 	nth,
 	fromPairs,
-} = require("ramda")
+} from "ramda"
 
 const MEETUP_API_ENDPOINT = `https://api.meetup.com`
 const LOCATIONIQ_API_ENDPOINT = `https://eu1.locationiq.org/v1/search.php`
@@ -79,12 +79,19 @@ const containsBeerMention = anyPass([
 	matches(wordMatch('pint'))
 ])
 
+const containsWineMention = anyPass([
+	matches(wordMatch('wine')),
+	matches(wordMatch('pinot')),
+	matches(wordMatch('rosé'))
+])
+
 const getFoodOrDrinkMentionsFromEvent = event => {
 	const description = propOr("", "description", event)
 
 	return [
 		['pizza', containsPizzaMention(description)],
 		['beer', containsBeerMention(description)],
+		['wine', containsWineMention(description)],
 	]
 }
 

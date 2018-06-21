@@ -7,6 +7,7 @@ const PizzaEvent = (event, index) => (
 		<td><a href={event.link} target="_blank" title="Go to event">{ event.local_date } - { event.local_time }</a></td>
 		<td>
 			{ pathOr(false, ['loot', 'pizza'], event) && '🍕' }
+			{ pathOr(false, ['loot', 'wine'], event) && '🍷' }
 			{ pathOr(false, ['loot', 'beer'], event) && '🍺' }
 		</td>
 	</tr>
