@@ -63,7 +63,7 @@ const findLatLonOfLocation = async ({ location }) => {
 	return await res.json()
 }
 
-const wordMatch = word => new RegExp(`(\s|\W)?${word}'?s?(\s|\W)?`, 'gmi')
+const wordMatch = word => new RegExp(`(\s|\W)?${word}'?s?[.!?\\-,]?(\s|\W)?`, 'gmi')
 
 const containsPizzaMention = anyPass([
 	matches(wordMatch('pizza')),
@@ -97,7 +97,7 @@ const getFoodOrDrinkMentionsFromEvent = event => {
 
 const addLootToEvents = reduce((prev, curr) => {
 	const loot = getFoodOrDrinkMentionsFromEvent(curr)
-	
+
 	if (
 		any(
 			pipe(
@@ -111,7 +111,7 @@ const addLootToEvents = reduce((prev, curr) => {
 			Object.assign({}, curr, { loot: fromPairs(loot) }),
 		]
 	}
-	
+
 	return prev
 }, [])
 
