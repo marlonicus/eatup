@@ -67,6 +67,7 @@ const wordMatch = word => new RegExp(`(\s|\W)?${word}'?s?[.!?\\-,]?(\s|\W)?`, 'g
 
 const containsPizzaMention = anyPass([
 	matches(wordMatch('pizza')),
+	matches(wordMatch('food is served')),
 	matches(wordMatch('🍕')),
 	matches(wordMatch('\'za'))
 ])
